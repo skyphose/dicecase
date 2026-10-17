@@ -1,0 +1,20 @@
+dicecase - a parametric two-piece snap-shut clamshell for six 24 mm d6.
+
+Copyright (c) 2026 skyphose
+
+Licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International License (CC BY-NC-SA 4.0).
+
+  You may:     share and adapt the model, including printing it for yourself
+               and remixing it into new designs.
+  You must:    give credit, link to the license, and release any derivative
+               under the same license.
+  You may not: use it commercially — that includes selling prints of it.
+
+Full licence: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+--------------------------------------------------------------------------
+To relicense, change this file and the licence field on the model listing.
+CC BY 4.0 drops the non-commercial restriction (people may sell prints);
+CC0 places it in the public domain with no attribution required.
+--------------------------------------------------------------------------
