@@ -107,7 +107,17 @@ both halves flat, outer face down, parting face up, exactly as oriented. no supp
 | `render.sh` | runs `tools/build_all.sh`, then renders previews |
 | `stl/` | `<variant>_{bottom,top}.stl` |
 | `3mf/` | the same parts |
-| `tools/` | meshcheck, overhang and volume (from deckblock), build_all with the closed-fit check |
+| `tools/` | meshcheck, overhang and volume (from deckblock), build_all with the closed-fit check, lamp and components for the die |
+| `counter-die/` | the counter die, see its readme |
+
+## the counter die
+
+[`counter-die/`](counter-die/) is a 24 mm d6 for the sixth pocket: counter symbols
+(+1/+1, −1/−1, poison, shield, energy) and the glg logo instead of pips. three versions,
+one per way you colour it: a one-colour cameo that reads by shadow, an engraved die for
+the ams or paint, and a 3-part shell-and-core that prints two colours with no purge.
+
+![the counter die in one colour](counter-die/images/mono.png)
 
 built on what [deckblock](https://github.com/skyphose/deckblock) learned: the band layout
 model, the 0.4 mm/side die clearance, the detent rule, the mesh tools and the

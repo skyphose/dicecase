@@ -1,4 +1,5 @@
-dicecase - a parametric two-piece snap-shut clamshell for six 24 mm d6.
+dicecase - a parametric two-piece snap-shut clamshell for six 24 mm d6,
+and the counter die made for its sixth pocket.
 
 Copyright (c) 2026 skyphose
 
@@ -17,4 +18,13 @@ Full licence: https://creativecommons.org/licenses/by-nc-sa/4.0/
 To relicense, change this file and the licence field on the model listing.
 CC BY 4.0 drops the non-commercial restriction (people may sell prints);
 CC0 places it in the public domain with no attribution required.
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+Not covered by the licence above:
+  counter-die/glg_logo.svg   the Great Lakes Gaming logo. All rights reserved
+                             by its owner; included so the die renders as
+                             designed. Swap logo_file for your own.
+  counter-die/fonts/         Barlow Semi Condensed, SIL Open Font License 1.1
+                             (counter-die/fonts/OFL-Barlow.txt).
 --------------------------------------------------------------------------
