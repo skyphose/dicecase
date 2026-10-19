@@ -10,7 +10,7 @@ include <$(pwd)/dicecase.scad>
 part = "none";
 intersection() { half(false); mirror([0, 0, 1]) half(true); }
 SCAD
-for v in grid row; do
+for v in grid row mixed; do
     for p in bottom top; do
         openscad -q --export-format binstl -o "stl/${v}_$p.stl" \
             -D "variant=\"$v\"" -D "part=\"$p\"" dicecase.scad >/dev/null 2>&1 &

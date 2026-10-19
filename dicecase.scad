@@ -13,13 +13,14 @@
 version = "0.4";
 
 /* [Variant] */
-variant = "grid";   // [grid, row, custom]
+variant = "grid";   // [grid, row, mixed, custom]
 
 /* [Part to render] */
 part = "bottom"; // [bottom, top, closed, open]
 
 /* [Dice] */
 die_size      = 24.0;   // across flats of one d6 -- CALIPER YOURS
+small_die     = 16.0;   // the deckblock-size d6, for the mixed layout
 die_clearance = 0.8;    // TOTAL added to die_size -> 0.4 per side (deckblock)
 die_headroom  = 0.3;    // TOTAL extra depth, split across the two halves
 
@@ -65,9 +66,11 @@ eps = 0.01;
 // ============================================================================
 //  Band layout model (deckblock's)
 // ============================================================================
-pocket = die_size + die_clearance;
-pd     = (die_size + die_headroom) / 2;
-function d6() = ["sq", pocket, pocket, pd];
+// Every die sits half in each shell, centred on the parting plane, so a
+// pocket's depth per half is half its die. A small die in a case sized for
+// big ones just gets a shallower pocket and a thicker floor under it.
+function d6(sz = die_size) =
+    ["sq", sz + die_clearance, sz + die_clearance, (sz + die_headroom) / 2];
 
 grid_bands = [
     [[ d6(), d6() ], band_gap, side_gap],
@@ -82,13 +85,22 @@ row_bands = [
     [[ d6() ], band_gap, side_gap],
     [[ d6() ], 0,        side_gap],
 ];
+// Six big dice over six small ones -- this case's six plus deckblock's six.
+mixed_bands = [
+    [[ d6(), d6() ], band_gap, side_gap],
+    [[ d6(), d6() ], band_gap, side_gap],
+    [[ d6(), d6() ], band_gap, side_gap],
+    [[ d6(small_die), d6(small_die), d6(small_die) ], band_gap, side_gap],
+    [[ d6(small_die), d6(small_die), d6(small_die) ], 0,        side_gap],
+];
 custom_bands = [
     [[ d6(), d6(), d6() ], band_gap, side_gap],
     [[ d6(), d6()       ], 0,        side_gap],
 ];
-bands = variant == "grid" ? grid_bands
-      : variant == "row" ? row_bands
-      :                    custom_bands;
+bands = variant == "grid"  ? grid_bands
+      : variant == "row"   ? row_bands
+      : variant == "mixed" ? mixed_bands
+      :                      custom_bands;
 
 function sum(v, i = 0) = i >= len(v) ? 0 : v[i] + sum(v, i + 1);
 function b_cells(b) = b[0];
@@ -100,6 +112,7 @@ field_w = max([for (b = bands) b_w(b)]);
 field_h = sum([for (b = bands) b_h(b)]) + sum([for (k = [0:len(bands)-2]) bands[k][1]]);
 case_w  = 2*wall + field_w;
 case_h  = 2*wall + field_h;
+pd      = max([for (b = bands, c = b_cells(b)) c[3]]);   // deepest pocket
 H       = floor_t + pd;
 
 rim_o   = skin_t + rim_c;           // rim outer face, inset from the case edge
@@ -173,7 +186,7 @@ module half(top) {
             c = b_cells(bands[k])[i];
             x = cell_x(bands[k], i);
             y = cell_y(k, c);
-            translate([x, y, -pd]) cube([c[1], c[2], pd + rim_h + 1]);
+            translate([x, y, -c[3]]) cube([c[1], c[2], c[3] + rim_h + 1]);
             intersection() {
                 translate([wall, wall, -lead_in - 1])
                     cube([case_w - 2*wall, case_h - 2*wall, lead_in + 2]);
@@ -219,5 +232,5 @@ else if (part == "open") {
 // ------------------------------------------------------------------- report ---
 echo(str("variant = ", variant));
 echo(str("case = ", case_w, " x ", case_h, " x ", 2*H, " mm closed"));
-echo(str("half = ", H, " mm, pocket depth per half = ", pd));
+echo(str("half = ", H, " mm, deepest pocket per half = ", pd));
 echo(str("bead interference = ", bead_h - rim_c, " mm"));

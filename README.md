@@ -5,7 +5,8 @@ snapped shut with no magnets and no hardware: the bottom has a rim that clicks i
 rebate in the top, with a bead along both long sides. thumb dishes on the two ends get
 it open.
 
-two layouts, `grid` (two across, three down) and `row` (six in a line).
+three layouts: `grid` (two across, three down), `row` (six in a line), and `mixed`, which
+holds the six 24 mm dice plus six 16 mm deckblock-size dice in two rows of three under them.
 
 ![the grid layout, open](preview_grid_open.png)
 
@@ -13,10 +14,24 @@ two layouts, `grid` (two across, three down) and `row` (six in a line).
 |---|---|---|---|
 | `grid` | 59.6 x 88.0 x 26.7 mm | 26.1 cm³ | 23.1 cm³ |
 | `row` | 31.2 x 173.2 x 26.7 mm | 28.8 cm³ | 24.5 cm³ |
+| `mixed` | 64.0 x 128.8 x 26.7 mm | 52.6 cm³ | 48.5 cm³ |
 
 the sixth die is free on `grid`: same 59.6 x 88 footprint the five-die pip layout had,
 with the die filling the two empty corners of the middle band. `row` at 173 mm wants a
 180 mm+ bed. on an a1 mini, lay it on the diagonal.
+
+## mixing die sizes
+
+![the mixed layout, open](preview_mixed_open.png)
+
+every die sits half in each shell, centred on the parting plane, so a pocket is half its
+own die deep. a 16 mm die in a case sized for 24 mm ones just gets an 8.15 mm pocket
+and a thicker floor under it, and it still registers the halves like the big ones do.
+`d6(size)` takes any size, so another mix is a new band list.
+
+the small dice stand 8 mm proud when the case is open, against 12 mm for the big ones,
+which is still plenty to grab. the thick floor under them is most of why `mixed` weighs
+twice what `grid` does. 15% infill takes care of it.
 
 ## the depth budget
 

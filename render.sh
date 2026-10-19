@@ -2,7 +2,7 @@
 # build + check every part (tools/build_all.sh), then render the previews.
 set -e
 sh tools/build_all.sh
-for v in grid row; do for view in open closed; do
+for v in grid row mixed; do for view in open closed; do
     openscad -q -D "variant=\"$v\"" -D "view=\"$view\"" \
         --viewall --autocenter --camera=0,0,0,50,0,30,0 --imgsize=1400,1000 \
         --colorscheme=Tomorrow -o "preview_${v}_$view.png" preview.scad

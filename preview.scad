@@ -17,7 +17,8 @@ if (view == "closed") {
     for (k = [0:len(bands)-1], i = [0:len(b_cells(bands[k]))-1]) {
         c = b_cells(bands[k])[i];
         color("#efe7d6")
-            translate([cell_x(bands[k], i) + c[1]/2, cell_y(k, c) + c[2]/2, -pd + die_size/2])
-                cube(die_size, center = true);
+            // the die each pocket was sized for: its width less the clearance
+            translate([cell_x(bands[k], i) + c[1]/2, cell_y(k, c) + c[2]/2, -c[3] + (c[1] - die_clearance)/2])
+                cube(c[1] - die_clearance, center = true);
     }
 }
