@@ -1,8 +1,15 @@
 // ============================================================================
-//  dicecase  --  clamshell case for six 24 mm d6, snap-shut, no hardware
+//  dicecase  --  a snap-shut clamshell dice case, three variants
 // ----------------------------------------------------------------------------
 //  Two separate halves split at the dice midline. A rim on the bottom clicks
-//  into a rebate in the top, beaded along both long sides.
+//  into a rebate in the top, beaded along both long sides. No hardware.
+//
+//  The variants answer "what are you carrying?":
+//    grid    6 x 24 mm d6, two across          59.6 x  88.0 x 26.7 mm
+//    row     6 x 24 mm d6, one line            31.2 x 173.2 x 26.7 mm
+//    mixed   6 x 24 mm + 6 x 16 mm d6          64.0 x 128.8 x 26.7 mm
+//  Everything else -- the rim, the bead, the thumb dishes, the depth budget
+//  -- is shared, so a fix to one is a fix to all three.
 //
 //  The dice are a second register: each sits half in the bottom and half in
 //  the top. Open, every die stands half proud of the bottom -- which is why
@@ -10,7 +17,7 @@
 //
 //  Print both halves flat, outer face down, parting face up. No supports.
 // ============================================================================
-version = "0.4";
+version = "0.5";
 
 /* [Variant] */
 variant = "grid";   // [grid, row, mixed, custom]

@@ -1,28 +1,43 @@
 # dicecase
 
-a two-piece clamshell for six 24 mm d6. two separate halves split at the dice midline,
-snapped shut with no magnets and no hardware: the bottom has a rim that clicks into a
-rebate in the top, with a bead along both long sides. thumb dishes on the two ends get
-it open.
+a snap-shut clamshell dice case, in three variants. two separate halves split at the dice
+midline, shut with no magnets and no hardware: the bottom has a rim that clicks into a
+rebate in the top, with a bead along both long sides. thumb dishes on the two ends get it
+open.
 
-three layouts: `grid` (two across, three down), `row` (six in a line), and `mixed`, which
-holds the six 24 mm dice plus six 16 mm deckblock-size dice in two rows of three under them.
+the variants answer "what are you carrying?", the same question deckblock's do. everything
+else, the rim, the bead, the thumb dishes and the depth budget, is shared, so a fix to one
+is a fix to all three.
 
-![the grid layout, open](preview_grid_open.png)
+| variant | holds | case, closed | bottom | top |
+|---|---|---|---|---|
+| `grid` | 6 x 24 mm d6, two across | 59.6 x 88.0 x 26.7 mm | 26.1 cm³ | 23.1 cm³ |
+| `row` | 6 x 24 mm d6, in a line | 31.2 x 173.2 x 26.7 mm | 28.8 cm³ | 24.5 cm³ |
+| `mixed` | 6 x 24 mm + 6 x 16 mm d6 | 64.0 x 128.8 x 26.7 mm | 52.6 cm³ | 48.5 cm³ |
 
-| | case, closed | bottom | top |
-|---|---|---|---|
-| `grid` | 59.6 x 88.0 x 26.7 mm | 26.1 cm³ | 23.1 cm³ |
-| `row` | 31.2 x 173.2 x 26.7 mm | 28.8 cm³ | 24.5 cm³ |
-| `mixed` | 64.0 x 128.8 x 26.7 mm | 52.6 cm³ | 48.5 cm³ |
+the models are named so they sort into the order you print them:
+`Dicecase_<Variant>_1-bottom` and `Dicecase_<Variant>_2-top`, in `stl/` and `3mf/`. pick a
+variant in the openscad customizer with `variant`, or edit `custom_bands` for your own.
 
-the sixth die is free on `grid`: same 59.6 x 88 footprint the five-die pip layout had,
-with the die filling the two empty corners of the middle band. `row` at 173 mm wants a
-180 mm+ bed. on an a1 mini, lay it on the diagonal.
+## grid
 
-## mixing die sizes
+![grid, open](images/1-Grid-open.png)
 
-![the mixed layout, open](preview_mixed_open.png)
+six 24 mm dice, three rows of two. the pocket-friendly one: 59.6 x 88 mm is about a deck
+of cards. the sixth pocket is where the [counter die](#the-counter-die) goes.
+
+## row
+
+![row, open](images/2-Row-open.png)
+
+the same six dice in a single line, 31.2 mm wide, for a pencil-case slot or a long pocket.
+at 173 mm it wants a 180 mm+ bed. on an a1 mini, lay it on the diagonal.
+
+## mixed
+
+![mixed, open](images/3-Mixed-open.png)
+
+the six 24 mm dice, plus six 16 mm deckblock-size dice in two rows of three under them.
 
 every die sits half in each shell, centred on the parting plane, so a pocket is half its
 own die deep. a 16 mm die in a case sized for 24 mm ones just gets an 8.15 mm pocket
@@ -87,14 +102,14 @@ the halves anyway.
 
 ## measured
 
-`tools/build_all.sh` builds all four parts and checks them.
+`tools/build_all.sh` builds all six parts, three variants x two halves, and checks them.
 
 - mesh: every part closed and manifold, genus 0. zero-area facets are stripped, same
   as deckblock.
 - overhang: 0.00 mm² unsupported on every part.
-- interference: the closed halves intersect for 0.000 mm³ on both layouts.
+- interference: the closed halves intersect for 0.000 mm³ on all three variants.
 
-`render.sh` runs that, then renders the previews and fails if any comes out blank.
+`render.sh` runs that, then renders `images/` and fails if any image comes out blank.
 each half is wrapped in `render()` in the previews, the same fix deckblock needed:
 without it the preview's csg normaliser gives up on the rim and draws nothing.
 
@@ -119,15 +134,16 @@ both halves flat, outer face down, parting face up, exactly as oriented. no supp
 |---|---|
 | `dicecase.scad` | parametric source: `variant`, `part` |
 | `preview.scad` | preview renders only |
-| `render.sh` | runs `tools/build_all.sh`, then renders previews |
-| `stl/` | `<variant>_{bottom,top}.stl` |
+| `render.sh` | runs `tools/build_all.sh`, then renders `images/` |
+| `stl/` | `Dicecase_<Variant>_{1-bottom,2-top}.stl`, numbered in print order |
 | `3mf/` | the same parts |
+| `images/` | `<n>-<Variant>-{open,closed}.png` |
 | `tools/` | meshcheck, overhang and volume (from deckblock), build_all with the closed-fit check, lamp and components for the die |
 | `counter-die/` | the counter die, see its readme |
 
 ## the counter die
 
-[`counter-die/`](counter-die/) is a 24 mm d6 for the sixth pocket: counter symbols
+[`counter-die/`](counter-die/) is a 24 mm d6 for the sixth pocket of `grid` (or any 24 mm pocket): counter symbols
 (+1/+1, −1/−1, poison, shield, energy) and the glg logo instead of pips. three versions,
 one per way you colour it: a one-colour cameo that reads by shadow, an engraved die for
 the ams or paint, and a 3-part shell-and-core that prints two colours with no purge.
